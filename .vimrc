@@ -17,6 +17,7 @@ set softtabstop=4
 highlight nastyChars guibg=Red ctermbg=1 term=standout
 autocmd BufWinEnter * syntax match nastyChars "[^\d32-\d127\d09]" containedin=ALL
 " test: È
+autocmd BufWinEnter * syntax match nastyChars " *$" containedin=ALL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
@@ -41,3 +42,31 @@ let g:lightline = {
       \   'charvaluehex': '0x%B'
       \ },
       \ }
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap <f2> :bd!<cr>
+nmap <f3> :qa!<cr>
+
+augroup VimReload
+    autocmd!
+    autocmd BufWritePost  $MYVIMRC  source $MYVIMRC
+augroup END
+
+if &diff
+    syntax off
+    nmap du :diffupdate<cr>
+    nmap <F7> :wq! \| q!<cr>
+    nmap <F6> :%diffget<cr>:wq! \| q!<cr>
+endif
+
+nmap S :%s@@g<LEFT><LEFT>
+vmap S  :s@@g<LEFT><LEFT>
+
+nmap <s-tab> <c-w><c-w>
+
+nnoremap tn :tabnew<space>
+
+nnoremap tk :tabnext<cr>
+nnoremap tj :tabprev<cr>
+nnoremap th :tabfirst<cr>
+nnoremap tl :tablast<cr>
