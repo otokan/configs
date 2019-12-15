@@ -14,8 +14,9 @@ set smarttab
 set softtabstop=4
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax match nastyChars "[^\d32-\d127\d09]"
-autocmd BufNewFile,BufFilePre,BufRead * highlight nastyChars guibg=Red ctermbg=2
+highlight nastyChars guibg=Red ctermbg=1 term=standout
+autocmd BufWinEnter * syntax match nastyChars "[^\d32-\d127\d09]" containedin=ALL
+" test: È
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
